@@ -1,0 +1,43 @@
+{% extends "LouvreTicketingBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Confirmation et paiement {% endblock %}
+
+{% block body %}
+	<div>
+		<h1> Récapitulatif de votre Réservation : </h1>
+	</div> </br>
+
+	{% set total = 0 %}
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col"> # </th>
+				<th scope="col"> Date </th>
+				<th scope="col"> Nom </th>
+				<th scope="col"> Prénom </th>
+				<th scope="col"> Date de Naissance </th>
+				<th scope="col"> Prix </th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for billet in billets %}
+				<tr>
+		 			<th scope="row"> {{ loop.index }} </th>
+		 			<th> {{ billet.visitDay | date('d/m/Y') }}
+		 			<td> {{ billet.name }} </td>
+		 			<td> {{ billet.forename }} </td>
+		 			<td> {{ billet.birthday | date('d/m/Y') }} </td>
+		 			<td> {{ billet.price }} €</td>
+		 		</tr>
+
+		 		{# Calcul du total #}
+		 	 	{% set total = total +  billet.price %}
+		 	{% endfor %}
+		</tbody>
+	</table>
+
+	<p> Total :  {{ total }} € </p>
+ 	
+ 	
+{% endblock %}
