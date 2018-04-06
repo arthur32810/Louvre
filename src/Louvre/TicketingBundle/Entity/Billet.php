@@ -77,6 +77,12 @@ class Billet
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Louvre\TicketingBundle\Entity\Reservation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $reservation;
+
 
     /**
      * Get id

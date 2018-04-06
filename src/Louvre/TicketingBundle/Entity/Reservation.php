@@ -42,6 +42,12 @@ class Reservation
      */
     private $reservationCode;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Louvre\TicketingBundle\Entity\Billet", mappedBy="reservation")
+     * @Assert\Valid
+     */
+    private $billet;
+
 
     /**
      * Get id
