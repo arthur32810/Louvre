@@ -44,7 +44,6 @@ class Reservation
 
     /**
      * @ORM\OneToMany(targetEntity="Louvre\TicketingBundle\Entity\Billet", mappedBy="reservation")
-     * @Assert\Valid
      */
     private $billet;
 
@@ -130,5 +129,45 @@ class Reservation
     {
         return $this->reservationCode;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->billet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add billet
+     *
+     * @param \Louvre\TicketingBundle\Entity\Billet $billet
+     *
+     * @return Reservation
+     */
+    public function addBillet(\Louvre\TicketingBundle\Entity\Billet $billet)
+    {
+        $this->billet[] = $billet;
+
+        return $this;
+    }
+
+    /**
+     * Remove billet
+     *
+     * @param \Louvre\TicketingBundle\Entity\Billet $billet
+     */
+    public function removeBillet(\Louvre\TicketingBundle\Entity\Billet $billet)
+    {
+        $this->billet->removeElement($billet);
+    }
+
+    /**
+     * Get billet
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBillet()
+    {
+        return $this->billet;
+    }
+}

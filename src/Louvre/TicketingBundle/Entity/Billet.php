@@ -285,5 +285,28 @@ class Billet
     {
         return $this->price;
     }
-}
 
+    /**
+     * Set reservation
+     *
+     * @param \Louvre\TicketingBundle\Entity\Reservation $reservation
+     *
+     * @return Billet
+     */
+    public function setReservation(\Louvre\TicketingBundle\Entity\Reservation $reservation)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Louvre\TicketingBundle\Entity\Reservation
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+}
