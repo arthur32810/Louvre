@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e4ae02bbdc83f72ef6c6568f2c3bbbb",
+    "content-hash": "94c2cc4a0f0e557d1b364bdc39025802",
     "packages": [
+        {
+            "name": "checkdomain/holiday",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/checkdomain/Holiday.git",
+                "reference": "ce9294e9bccc059768218cdc4673564b6ccf738a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/checkdomain/Holiday/zipball/ce9294e9bccc059768218cdc4673564b6ccf738a",
+                "reference": "ce9294e9bccc059768218cdc4673564b6ccf738a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-calendar": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Checkdomain\\Holiday\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Paap",
+                    "email": "b.paap@checkdomain.de",
+                    "homepage": "http://checkdomain.de"
+                }
+            ],
+            "description": "Checkdomain/Holiday provides a simple class to get holidays for a specified country",
+            "keywords": [
+                "holiday"
+            ],
+            "time": "2017-11-21T15:26:50+00:00"
+        },
         {
             "name": "composer/ca-bundle",
             "version": "1.1.1",
@@ -2314,16 +2358,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.7",
+            "version": "v3.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "e4b72beb8961340764367a804f21044e83fc19a8"
+                "reference": "48c669ec1a2b0425d4a82c7ad4bce2f5b947b95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/e4b72beb8961340764367a804f21044e83fc19a8",
-                "reference": "e4b72beb8961340764367a804f21044e83fc19a8",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/48c669ec1a2b0425d4a82c7ad4bce2f5b947b95e",
+                "reference": "48c669ec1a2b0425d4a82c7ad4bce2f5b947b95e",
                 "shasum": ""
             },
             "require": {
@@ -2376,7 +2420,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-03-20T23:37:33+00:00"
+            "time": "2018-04-04T15:02:59+00:00"
         }
     ],
     "aliases": [],
