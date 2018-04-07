@@ -21,8 +21,8 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('forename',    TextType::class, array('label' => 'Prénom'))
-        ->add('name',       TextType::class, array('label' => 'Nom'))
+        ->add('name',    TextType::class, array('label' => 'Prénom'))
+        ->add('lastname',       TextType::class, array('label' => 'Nom'))
         ->add('birthday',   BirthdayType::class, array('label' => 'Date de naissance'))
         ->add('country',    CountryType::class, array('placeholder' => 'Sélectionner votre pays', 'label' => 'Pays'))
         ->add('duration',     ChoiceType::class, array('label' => 'Ticket',
