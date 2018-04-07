@@ -41,7 +41,7 @@
 	    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
 	    var $container = $('div#louvre_ticketingbundle_reservation_billet');
 	    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-	    var index = ($container.find(':input').length)/9;
+	    var index = ($container.find(':input').length)/8;
 
 	    for(i=1; i<=index; i++) {
 	         $('#louvre_ticketingbundle_reservation_billet').children(':nth-child(' + i + ')').children(':nth-child(1)').html('<b>Billet n°' + (i) + '</b>' );
