@@ -4,6 +4,7 @@ namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Louvre\TicketingBundle\Validator\CloseDay as CloseDay;
 
 /**
  * Reservation
@@ -27,6 +28,7 @@ class Reservation
      *
      * @ORM\Column(name="day", type="date")
      * @Assert\GreaterThanOrEqual("today UTC", message="Vous ne pouvez pas réservez pour les jours passés")
+     * @CloseDay()
      */
     private $day;
 
