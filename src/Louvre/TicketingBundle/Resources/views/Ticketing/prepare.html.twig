@@ -4,7 +4,8 @@
 
 {% block body %}
 	<div>
-		<h1> Récapitulatif de votre Réservation : </h1>
+		<h1> Récapitulatif de votre Réservation : </h1> <br>
+		<p> Date de votre visite : {{ reservation.day | date('d/m/Y') }} </p>
 	</div> </br>
 
 	{% set total = 0 %}
@@ -13,7 +14,6 @@
 		<thead>
 			<tr>
 				<th scope="col"> # </th>
-				<th scope="col"> Date </th>
 				<th scope="col"> Nom </th>
 				<th scope="col"> Prénom </th>
 				<th scope="col"> Date de Naissance </th>
@@ -24,7 +24,6 @@
 			{% for billet in billets %}
 				<tr>
 		 			<th scope="row"> {{ loop.index }} </th>
-		 			<th> {{ billet.visitDay | date('d/m/Y') }}
 		 			<td> {{ billet.name }} </td>
 		 			<td> {{ billet.lastname }} </td>
 		 			<td> {{ billet.birthday | date('d/m/Y') }} </td>
