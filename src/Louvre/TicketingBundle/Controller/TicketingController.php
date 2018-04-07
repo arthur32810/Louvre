@@ -31,12 +31,12 @@ class TicketingController extends Controller
               // Récupération de la session
               $session = $request->getSession();
               $billets = $reservation->getBillet();
-             /* $price = $this->container->get('louvre_ticketing.price');
+              $price = $this->container->get('louvre_ticketing.price');
               $price = $price->price($billets);
               
-              $billets = $session->set('billets', $billets);
+              $billets = $session->set('billets', $reservation);
               // envoie vers la page récapitulative si formulaire soumis
-              return $this->redirectToRoute('booking_prepare');*/
+              return $this->redirectToRoute('booking_prepare');
         }
         // Envoie vers la page de formulaire si non soumis
         return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
@@ -44,9 +44,15 @@ class TicketingController extends Controller
         ));
     }
 
-    public function prepareAction()
+    public function prepareAction(Request $request)
     {
-    	
+    	  // Récupération de la session
+        $session = $request->getSession();
+        $reservation = $session->get('billets');
+
+        $billets = $reservation->getBillet();
+
+        return $this->render('LouvreTicketingBundle:Ticketing:prepare.html.twig', array("billets" => $billets));
     }
 
     public function informationsAction()
