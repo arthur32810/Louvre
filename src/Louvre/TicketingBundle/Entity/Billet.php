@@ -3,6 +3,7 @@
 namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Billet
@@ -25,6 +26,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="Le nom doit comporter au moins {{ limit }} caractères")
      */
     private $name;
 
@@ -32,6 +34,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="Le prénom doit comporter au moins {{ limit }} caractères")
      */
     private $lastname;
 
@@ -39,6 +42,8 @@ class Billet
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date")
+     * @Assert\LessThan("today UTC", message="Vous devez être né(e) avant aujourd'hui")
+     * @Assert\LessThan("-4 years", message="L'entrée est gratuite pour les enfants de moins de 4 ans")
      */
     private $birthday;
 
@@ -46,6 +51,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\Country()
      */
     private $country;
 
@@ -60,6 +66,7 @@ class Billet
      * @var bool
      *
      * @ORM\Column(name="reduction", type="boolean")
+     * @Assert\Type(type="bool", message="La valeur {{ value }} n'est pas un {{ type }} valide")
      */
     private $reduction;
 
@@ -67,6 +74,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="duration", type="decimal", precision=10, scale=1)
+     * @Assert\Regex("/1|0.5/", message="Ce champ n'accepte que 1 ou 0.5")
      */
     private $duration;
 
