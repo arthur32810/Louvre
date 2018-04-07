@@ -3,6 +3,7 @@
 namespace Louvre\TicketingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Reservation
@@ -25,6 +26,7 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="day", type="date")
+     * @Assert\GreaterThanOrEqual("today UTC", message="Vous ne pouvez pas réservez pour les jours passés")
      */
     private $day;
 
@@ -44,6 +46,7 @@ class Reservation
 
     /**
      * @ORM\OneToMany(targetEntity="Louvre\TicketingBundle\Entity\Billet", mappedBy="reservation")
+     * @Assert\Valid
      */
     private $billet;
 
