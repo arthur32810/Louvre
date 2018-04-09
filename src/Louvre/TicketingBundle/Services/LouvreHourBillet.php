@@ -2,6 +2,8 @@
 
 namespace Louvre\TicketingBundle\Services;
 
+use DateTime;
+
 class LouvreHourBillet
 {
 	public function hourBillet($reservation)
