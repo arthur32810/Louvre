@@ -6,6 +6,10 @@ services:
           - %childrenPrice%
           - %seniorPrice%
           - %reducePrice%
+
+  louvre_ticketing.hoursBillet:
+      class: Louvre\TicketingBundle\Services\LouvreHourBillet
+      
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
