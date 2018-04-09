@@ -23,7 +23,11 @@ class BilletType extends AbstractType
         $builder
         ->add('name',    TextType::class, array('label' => 'Prénom'))
         ->add('lastname',       TextType::class, array('label' => 'Nom'))
-        ->add('birthday',   BirthdayType::class, array('label' => 'Date de naissance'))
+        ->add('birthday',   BirthdayType::class, array('label' => 'Date de naissance',
+            'widget' => 'single_text',
+            'data' => new \DateTime(),
+            'html5' => true,
+            'attr' => ['class' => 'data-picker']))
         ->add('country',    CountryType::class, array('placeholder' => 'Sélectionner votre pays', 'label' => 'Pays'))
         ->add('duration',     ChoiceType::class, array('label' => 'Ticket',
             'choices' => array(
