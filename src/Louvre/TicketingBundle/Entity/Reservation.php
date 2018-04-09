@@ -52,6 +52,15 @@ class Reservation
      */
     private $billet;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->day = new \DateTime();
+        $this->billet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -134,13 +143,7 @@ class Reservation
     {
         return $this->reservationCode;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->billet = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    
 
     /**
      * Add billet
