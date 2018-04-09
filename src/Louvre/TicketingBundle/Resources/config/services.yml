@@ -9,6 +9,7 @@ services:
 
   louvre_ticketing.hourBillet:
       class: Louvre\TicketingBundle\Services\LouvreHourBillet
+      arguments: ["@request_stack"]
 
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example
