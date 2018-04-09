@@ -91,6 +91,11 @@ class Billet
      */
     private $reservation;
 
+    public function __construct()
+    {
+        $this->birthday = new \DateTime();
+    }
+
 
     /**
      * Get id
