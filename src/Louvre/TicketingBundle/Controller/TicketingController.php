@@ -30,6 +30,11 @@ class TicketingController extends Controller
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
               // Récupération de la session
               $session = $request->getSession();
+
+              // Appel du service pour tester si le billet et acheté la même jour au dessus de 14h
+              $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
+              $hourBillet = $hourBillet->hourBillet($reservation);
+
               $billets = $reservation->getBillet();
               $price = $this->container->get('louvre_ticketing.price');
               $price = $price->price($billets);
