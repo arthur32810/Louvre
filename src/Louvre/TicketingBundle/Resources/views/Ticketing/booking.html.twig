@@ -13,11 +13,15 @@
 
 		{{ form_row(form.day) }}
 
-
+		
 	  	<div class="form-group">
+	  		 {% for message in app.session.flashbag.get('hourBillet') %}
+		        <p> {{ message }} </p>
+		     {% endfor %}
 	  		{{ form_errors(form.billet)}}
 	  		{{ form_widget(form.billet)}}
   			<a href="#" id="add_billet" class="btn btn-default">Ajouter un billet</a>
+
 
   		</div>
 
