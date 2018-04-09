@@ -31,11 +31,12 @@ class TicketingController extends Controller
               // Récupération de la session
               $session = $request->getSession();
 
+              $billets = $reservation->getBillet();
+
               // Appel du service pour tester si le billet et acheté la même jour au dessus de 14h
               $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
-              $hourBillet = $hourBillet->hourBillet($reservation);
+              $hourBillet = $hourBillet->hourBillet($reservation, $billet);
 
-              $billets = $reservation->getBillet();
               $price = $this->container->get('louvre_ticketing.price');
               $price = $price->price($billets);
               
