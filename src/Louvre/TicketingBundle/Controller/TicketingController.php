@@ -37,12 +37,15 @@ class TicketingController extends Controller
               $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
               $hourBillet = $hourBillet->hourBillet($reservation, $billets);
 
-              $price = $this->container->get('louvre_ticketing.price');
-              $price = $price->price($billets);
-              
-              $billets = $session->set('billets', $reservation);
-              // envoie vers la page récapitulative si formulaire soumis
-              return $this->redirectToRoute('booking_prepare');
+              if($hourBillet == 'okHourBillet')
+              {
+                $price = $this->container->get('louvre_ticketing.price');
+                $price = $price->price($billets);
+                
+                $billets = $session->set('billets', $reservation);
+                // envoie vers la page récapitulative si formulaire soumis
+                return $this->redirectToRoute('booking_prepare');
+              }
         }
         // Envoie vers la page de formulaire si non soumis
         return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
