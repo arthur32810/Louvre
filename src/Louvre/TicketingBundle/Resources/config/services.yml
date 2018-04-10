@@ -11,6 +11,9 @@ services:
       class: Louvre\TicketingBundle\Services\LouvreHourBillet
       arguments: ["@request_stack"]
 
+  louvre_ticketing.quotaMax:
+      class: Louvre\TicketingBundle\Services\LouvreQuotaMax
+
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
