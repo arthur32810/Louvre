@@ -25,7 +25,7 @@ class LouvreQuotaMax
     // on récupére le nombre de réservation pour le jour $date
     $nReservation = $this->em
       ->getRepository('LouvreTicketingBundle:Billet')
-      ->nReservation($date);
+      ->nReservation($reservation);
   
     if($nReservation>$quotaMax) { 
         //erreur
