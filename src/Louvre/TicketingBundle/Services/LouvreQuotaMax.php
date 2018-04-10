@@ -2,6 +2,9 @@
 
 namespace Louvre\TicketingBundle\Services;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+use Doctrine\ORM\EntityManagerInterface;
+
 class LouvreQuotaMax
 {
 	private $requestStack;
@@ -18,7 +21,7 @@ class LouvreQuotaMax
   public function quotaMax($reservation)
   {
   	// Récupération du quota
-    $quotaMax = $this->quotamax;
+    $quotaMax = $this->quotaMax;
 
     $request = $this->requestStack->getCurrentRequest();
 
