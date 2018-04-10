@@ -21,6 +21,8 @@ class LouvreQuotaMax
 
   public function quotaMax($reservation, $billets)
   {
+  	$request = $this->requestStack->getCurrentRequest();
+
   	// Récupération du quota
     $quotaMax = $this->quotaMax;
 
@@ -47,8 +49,11 @@ class LouvreQuotaMax
 	    //On regarde le nombre de réservation, s'il y a plus de 1000 places -> erreur
 	    if( $nReservation > $quotaMax ) 
 	    { 
+	    	//Définition de la session
+			$session = $request->getSession();
+
 	    	//Message d'erreur
-			$session->getFlashBag()->add('QuotaMax', 'Vous dépassé le nombre de visiteur du jour, vous ne pouvez pas réserver votre billet '.($i+1));
+			$session->getFlashBag()->add('quotaMax', 'Vous dépassé le nombre de visiteur du jour, vous ne pouvez pas réserver votre billet '.($i+1));
 
 	        $return = 'moreQuotaMax';
 	    }
