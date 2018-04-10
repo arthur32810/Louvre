@@ -13,6 +13,10 @@ services:
 
   louvre_ticketing.quotaMax:
       class: Louvre\TicketingBundle\Services\LouvreQuotaMax
+      arguments: 
+        - "@request_stack", 
+        - "@doctrine.orm.entity_manager",
+        - %quotaMax%
 
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example
