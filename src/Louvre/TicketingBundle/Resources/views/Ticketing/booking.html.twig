@@ -18,6 +18,9 @@
 	  		 {% for message in app.session.flashbag.get('hourBillet') %}
 		        <p> {{ message }} </p>
 		     {% endfor %}
+		     {% for message in app.session.flashbag.get('quotaMax') %}
+		        <p> {{ message }} </p>
+		     {% endfor %}
 	  		{{ form_errors(form.billet)}}
 	  		{{ form_widget(form.billet)}}
   			<a href="#" id="add_billet" class="btn btn-default">Ajouter un billet</a>
