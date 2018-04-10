@@ -42,12 +42,15 @@ class TicketingController extends Controller
                   $quotaMax = $this->container->get('louvre_ticketing.quotaMax');
                   $quotaMax = $quotaMax->quotaMax($reservation, $billets);
 
-                  $price = $this->container->get('louvre_ticketing.price');
-                  $price = $price->price($billets);
-                  
-                  $billets = $session->set('billets', $reservation);
-                  // envoie vers la page récapitulative si formulaire soumis
-                  //return $this->redirectToRoute('booking_prepare');
+                  if($quotaMax != 'moreQuotaMax')
+                  {
+                      $price = $this->container->get('louvre_ticketing.price');
+                      $price = $price->price($billets);
+                      
+                      $billets = $session->set('billets', $reservation);
+                      // envoie vers la page récapitulative si formulaire soumis
+                      return $this->redirectToRoute('booking_prepare');
+                  }
               }
         }
         // Envoie vers la page de formulaire si non soumis
