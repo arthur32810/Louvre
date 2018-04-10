@@ -25,6 +25,9 @@ class LouvreHourBillet
 	  	//Défintion d'un compteur pour les billet
 	  	$i=0;
 
+	  	//Défintion de la variable retour
+	  	$return = 'ok';
+
 	  	foreach ($billets as $billet) {
 	  		if($visitday == $day)
 			{
@@ -46,11 +49,13 @@ class LouvreHourBillet
 					//Message d'erreur
 					$session->getFlashBag()->add('hourBillet', 'Votre billet '.$i.' n\'est pas valide. Vous ne pouvez commandé de billet "journée" au-dessus de 14 heures.');
 
+					$return = 'notHourBillet';
+
 				}
 
 			}
-			else { return 'okHourBillet'; }
 	  	}
+	  	return $return;
 		
 	}
 }
