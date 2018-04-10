@@ -15,7 +15,7 @@ class LouvreQuotaMax
     $this->quotaMax 	= $quotaMax;
   }
 
-  public function validate($date, Constraint $constraint)
+  public function quotaMax($reservation)
   {
   	// Récupération du quota
     $quotaMax = $this->quotamax;
