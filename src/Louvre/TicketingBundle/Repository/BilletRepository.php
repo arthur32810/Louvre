@@ -10,4 +10,17 @@ namespace Louvre\TicketingBundle\Repository;
  */
 class BilletRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	public function nReservation($visitDay)
+	{
+
+		$qb = $this->createQueryBuilder('b');
+
+		$qb
+			->where('b.visitDay = :visitDay')
+			->setParameter('visitDay', $visitDay);
+		$nReservation = $qb->getQuery()->getScalarResult();
+
+		return count($nReservation);
+	}
 }
