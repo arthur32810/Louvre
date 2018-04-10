@@ -39,7 +39,9 @@ class TicketingController extends Controller
 
               if($hourBillet != 'notHourBillet')
               {
-                
+                  $quotaMax = $this->container->get('louvre_ticketing.quotaMax');
+                  $quotaMax = $quotaMax->quotaMax($reservation);
+                  
                   $price = $this->container->get('louvre_ticketing.price');
                   $price = $price->price($billets);
                   
