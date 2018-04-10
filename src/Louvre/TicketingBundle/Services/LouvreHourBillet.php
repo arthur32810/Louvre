@@ -49,7 +49,7 @@ class LouvreHourBillet
 				}
 
 			}
-			else { return; }
+			else { return 'okHourBillet'; }
 	  	}
 		
 	}
