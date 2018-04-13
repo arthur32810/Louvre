@@ -37,6 +37,18 @@
 	</table>
 
 	<p> Total :  {{ total }} € </p>
+
+	<form action="{{ path('order_checkout') }}" method="POST">
+        <script
+                src="URL_DE_STRIPE/checkout.js" class="stripe-button"
+                data-key="TEST_PUBLISHABLE_KEY"
+                data-amount="99500"
+                data-name="oc-stripe"
+                data-description="Widget"
+                data-locale="auto"
+                data-currency="eur">
+        </script>
+    </form>
  	
  	
 {% endblock %}
