@@ -18,6 +18,9 @@ services:
         - "@doctrine.orm.entity_manager"
         - %quotaMax%
 
+  louvre_ticketing.stripe:
+      class: Louvre\TicketingBundle\Services\Stripe
+
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
