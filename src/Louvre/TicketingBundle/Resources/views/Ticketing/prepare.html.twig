@@ -38,17 +38,17 @@
 
 	<p> Total :  {{ total }} € </p>
 
-	<form action="{{ path('order_checkout') }}" method="POST">
+	<form action="{{ path('booking_checkout') }}" method="POST">
         <script
-                src="URL_DE_STRIPE/checkout.js" class="stripe-button"
-                data-key="TEST_PUBLISHABLE_KEY"
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_KgmdfQAwbR879bX872M4z1he"
                 data-amount="99500"
-                data-name="oc-stripe"
-                data-description="Widget"
+                data-name="Musée du Louvre"
+                data-description="Réservation de billets"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                 data-locale="auto"
                 data-currency="eur">
         </script>
     </form>
- 	
  	
 {% endblock %}
