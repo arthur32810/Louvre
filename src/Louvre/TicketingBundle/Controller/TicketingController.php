@@ -74,7 +74,19 @@ class TicketingController extends Controller
     { 
         if($_POST)
         {
-          
+            $stripe = $this->container->get('louvre_ticketing.stripe');
+            $stripe = $stripe->stripe();
+
+            if($stripe == 'success')
+            {
+                $this->addFlash("success","Votre réservation à été effectué, vous allez recevoir un mail de confirmation");
+                return $this->redirectToRoute("booking_prepare");
+            }
+            elseif($stripe == 'error')
+            {
+                $this->addFlash("error","Une erreur est intervenue durant le paiement, veuillez réessayer");
+                return $this->redirectToRoute("booking_prepare");
+            }
         }
         else 
         {
