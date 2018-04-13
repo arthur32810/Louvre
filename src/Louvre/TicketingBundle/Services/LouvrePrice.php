@@ -47,7 +47,8 @@ class LouvrePrice
 					if($birthday < $day)
 					{
 						// Calcul de l'âge
-						$age = intval( ($birthday->diff($day))->format('%y') );
+						$age = intval( $birthday->diff($day) );
+						$age = $age->format('%y');
 
 						if($age < 4)
 						{
