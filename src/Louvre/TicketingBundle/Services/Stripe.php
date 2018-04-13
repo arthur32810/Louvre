@@ -27,7 +27,7 @@ class Stripe
 		  } 
 
 		  catch(\Stripe\Error\Card $e) {
-		  	return 'error'
+		  	return 'error';
 		  }
 	}
 }
