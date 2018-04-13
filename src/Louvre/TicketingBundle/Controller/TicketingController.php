@@ -70,6 +70,11 @@ class TicketingController extends Controller
         return $this->render('LouvreTicketingBundle:Ticketing:prepare.html.twig', array("reservation" => $reservation, "billets" => $billets));
     }
 
+    public function checkoutAction(Request $request)
+    {
+        //TODO : Cette action est à faire
+    }
+
     public function informationsAction()
     {
           return $this->render('LouvreTicketingBundle:Ticketing:informations.html.twig');
