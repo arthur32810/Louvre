@@ -38,7 +38,8 @@ class LouvrePrice
 				else 
 				{
 					// Création de la date d'anniversaire
-					$birthday = new DateTime(($billet->getBirthday())->format('m/d/Y'));
+					$birthday = $billet->getBirthday();
+
 
 					// Création de la date du jour
 					$day = new DateTime(date('m/d/Y'));
