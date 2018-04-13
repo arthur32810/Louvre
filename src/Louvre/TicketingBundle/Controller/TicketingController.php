@@ -71,27 +71,36 @@ class TicketingController extends Controller
     }
 
     public function checkoutAction(Request $request)
-    {
-         \Stripe\Stripe::setApiKey("sk_test_GyKdvxgMo9I1HSjAzeHsdeZp");
+    { 
+        if($_POST)
+        {
+          
+           \Stripe\Stripe::setApiKey("sk_test_GyKdvxgMo9I1HSjAzeHsdeZp");
 
-        // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
 
-        // Create a charge: this will charge the user's card
-        try {
-            $charge = \Stripe\Charge::create(array(
-                "amount" => 1000, // Amount in cents
-                "currency" => "eur",
-                "source" => $token,
-                "description" => "Paiement Stripe - OpenClassrooms Exemple"
-            ));
-            $this->addFlash("success","Bravo ça marche !");
-            return $this->redirectToRoute("booking_prepare");
-        } catch(\Stripe\Error\Card $e) {
+          // Get the credit card details submitted by the form
+          $token = $_POST['stripeToken'];
 
-            $this->addFlash("error","Snif ça marche pas :(");
-            return $this->redirectToRoute("booking_prepare");
-            // The card has been declined
+          // Create a charge: this will charge the user's card
+          try {
+              $charge = \Stripe\Charge::create(array(
+                  "amount" => 1000, // Amount in cents
+                  "currency" => "eur",
+                  "source" => $token,
+                  "description" => "Paiement Stripe - OpenClassrooms Exemple"
+              ));
+              $this->addFlash("success","Bravo ça marche !");
+              return $this->redirectToRoute("booking_prepare");
+          } catch(\Stripe\Error\Card $e) {
+
+              $this->addFlash("error","Snif ça marche pas :(");
+              return $this->redirectToRoute("booking_prepare");
+              // The card has been declined
+          }
+        }
+        else 
+        {
+          return $this->redirectToRoute("booking"); 
         }
     }
 
