@@ -17,3 +17,7 @@ booking_checkout:
 informations:
     path:     /informations-pratiques
     defaults: {_controller: LouvreTicketingBundle:Ticketing:informations}
+
+email:
+    path:       /email
+    defaults: {_controller: LouvreTicketingBundle:Ticketing:email}
