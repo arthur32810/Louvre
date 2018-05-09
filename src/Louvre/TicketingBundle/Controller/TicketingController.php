@@ -81,6 +81,9 @@ class TicketingController extends Controller
             //paiement réussi
             if($stripe == 'success')
             {
+              // envoie de mail
+              $mailer = $this->get('mailer');
+
                 $this->addFlash("success","Votre réservation à été effectué, vous allez recevoir un mail de confirmation dans les prochaines minutes");
 
                 return $this->redirectToRoute("booking_prepare");
