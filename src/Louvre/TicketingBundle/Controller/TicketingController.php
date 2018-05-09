@@ -102,6 +102,22 @@ class TicketingController extends Controller
         }
     }
 
+    public function emailAction()
+    {
+      $mailer = $this->get('mailer');
+
+      $message = (new \Swift_Message('Test Email'))
+        ->setFrom('billetterie@louvre.fr')
+        ->setTo('arthur32810@hotmail.fr')
+        ->setBody(
+                $this->renderView(
+                  'LouvreTicketingBundle:Ticketing:test.html.twig'), 'text/html');
+
+      $mailer->send($message);
+
+      return $this->render('LouvreTicketingBundle:Ticketing:test.html.twig');
+    }
+
     public function informationsAction()
     {
           return $this->render('LouvreTicketingBundle:Ticketing:informations.html.twig');
