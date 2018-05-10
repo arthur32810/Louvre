@@ -74,7 +74,26 @@ class TicketingController extends Controller
     { 
         if($_POST)
         {
-          // paiement stripe
+          // Récupération de la session
+          $session = $request->getSession();
+          $reservation = $session->get('billets');
+
+          $billets = $reservation->getBillet();
+
+          /*$mailer = $this->get('mailer');
+
+          $message = (new \Swift_Message('Test Email'))
+            ->setFrom('billetterie@louvre.fr')
+            ->setTo('arthur32810@hotmail.fr')
+            ->setBody(
+                    $this->renderView(
+                      'LouvreTicketingBundle:Ticketing:billet.html.twig'), 'text/html');
+
+          $mailer->send($message);*/
+
+         // return $this->render('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
+
+          /*// paiement stripe
             $stripe = $this->container->get('louvre_ticketing.stripe');
             $stripe = $stripe->stripe();
 
@@ -94,7 +113,7 @@ class TicketingController extends Controller
                 $this->addFlash("error","Une erreur est intervenue durant le paiement, veuillez réessayer");
                 
                 return $this->redirectToRoute("booking_prepare");
-            }
+            }*/
         }
         else 
         {
@@ -104,18 +123,7 @@ class TicketingController extends Controller
 
     public function emailAction()
     {
-      $mailer = $this->get('mailer');
-
-      $message = (new \Swift_Message('Test Email'))
-        ->setFrom('billetterie@louvre.fr')
-        ->setTo('arthur32810@hotmail.fr')
-        ->setBody(
-                $this->renderView(
-                  'LouvreTicketingBundle:Ticketing:test.html.twig'), 'text/html');
-
-      $mailer->send($message);
-
-      return $this->render('LouvreTicketingBundle:Ticketing:test.html.twig');
+      
     }
 
     public function informationsAction()
