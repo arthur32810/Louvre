@@ -83,17 +83,16 @@ class TicketingController extends Controller
           $code = $this->container->get('louvre_ticketing.codeReservation');
           $code = $code->code(10);
 
-
-          /*$mailer = $this->get('mailer');
+          $mailer = $this->get('mailer');
 
           $message = (new \Swift_Message('Test Email'))
             ->setFrom('billetterie@louvre.fr')
-            ->setTo('arthur32810@hotmail.fr')
+            ->setTo($_POST['stripeEmail'])
             ->setBody(
                     $this->renderView(
                       'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html');
 
-          $mailer->send($message);*/
+          $mailer->send($message);
 
           return $this->render('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
 
