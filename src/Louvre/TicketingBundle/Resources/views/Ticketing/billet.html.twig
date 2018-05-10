@@ -9,9 +9,12 @@
   </head>
   <body>
   	<div class="container">
-
-  		<h1> Musée du Louvre </h1>
-		<hr>
+  		<br>
+  		<div style="text-align: center;"> 
+	  		<img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/louvreticketing/images/logo.jpg') }}" alt="logo musée du louvre" />
+	  		<h1> Musée du Louvre </h1>
+	  	</div>
+		 <br>
 
 		<h3> Confirmation de votre réservation pour le {{ reservation.day | date('d/m/Y') }} </h3>
 		<p> Ce mail fait office de billet de réservation </p>
@@ -37,7 +40,7 @@
 	 	<hr>
 
 	  	<footer>
-	  		<p class="text-center"> Musée du Louvre © {{ 'now'|date('Y') }}.</p>
+	  		<p style="text-align: center"> Musée du Louvre © {{ 'now'|date('Y') }}.</p>
 	  	</footer>
 	 </div>
 
