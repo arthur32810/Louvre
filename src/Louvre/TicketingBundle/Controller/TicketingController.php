@@ -80,6 +80,10 @@ class TicketingController extends Controller
 
           $billets = $reservation->getBillet();
 
+          $code = $this->container->get('louvre_ticketing.codeReservation');
+          $code = $code->code(10);
+
+
           /*$mailer = $this->get('mailer');
 
           $message = (new \Swift_Message('Test Email'))
@@ -91,7 +95,7 @@ class TicketingController extends Controller
 
           $mailer->send($message);*/
 
-         // return $this->render('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
+          return $this->render('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
 
           /*// paiement stripe
             $stripe = $this->container->get('louvre_ticketing.stripe');
