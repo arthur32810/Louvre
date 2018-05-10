@@ -1,10 +1,10 @@
 <?php
 
-namespace Louvre\TicketingBundle\CodeReservation;
+namespace Louvre\TicketingBundle\Services;
 
 class LouvreCodeReservation
 {
-	function random($car) {
+	function code($car) {
 
     $code = "";
     $chaine = "abcdefghijklmnpqrstuvwxy";
@@ -17,10 +17,4 @@ class LouvreCodeReservation
 
     return $code;
   }
-
-    // APPEL
-    // Génère une chaine de longueur 8
-    $code = random(10);
-
-    echo 'LV-'.$code;
 }
