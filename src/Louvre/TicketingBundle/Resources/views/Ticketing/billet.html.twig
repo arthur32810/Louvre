@@ -18,29 +18,18 @@
 
 		{% set total = 0 %}
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col"> # </th>
-					<th scope="col"> Nom </th>
-					<th scope="col"> Prénom </th>
-					<th scope="col"> Prix </th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for billet in billets %}
-				<tr>
-		 			<th scope="row"> {{ loop.index }} </th>
-		 			<td> {{ billet.name }} </td>
-		 			<td> {{ billet.lastname }} </td>
-		 			<td> {{ billet.price }} €</td>
-		 		</tr>
+		
+			{% for billet in billets %}
+			<h3> <b> Billet  {{ loop.index }} </b> </h3>
+	 		<p> Nom : {{ billet.name }} </p>
+	 		<p> Prénom :  {{ billet.lastname }} </p>
+	 		<p> Prix : {{ billet.price }} € </p>
 
-		 		{# Calcul du total #}
-		 	 	{% set total = total +  billet.price %}
-		 	{% endfor %}
-			</tbody>
-		</table>
+
+	 		{# Calcul du total #}
+	 	 	{% set total = total +  billet.price %}
+	 	{% endfor %}
+
 		<p> <b> Total :  {{ total }} € </b> </p>
 
 		<p> code de réservation : LV-{{ code }} </p>

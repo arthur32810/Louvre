@@ -91,7 +91,7 @@ class TicketingController extends Controller
             ->setTo('arthur32810@hotmail.fr')
             ->setBody(
                     $this->renderView(
-                      'LouvreTicketingBundle:Ticketing:billet.html.twig'), 'text/html');
+                      'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html');
 
           $mailer->send($message);*/
 
