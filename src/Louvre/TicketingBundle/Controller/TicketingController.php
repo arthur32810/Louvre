@@ -46,7 +46,8 @@ class TicketingController extends Controller
                   {
                       $price = $this->container->get('louvre_ticketing.price');
                       $price = $price->price($billets);
-                      
+
+
                       $billets = $session->set('billets', $reservation);
                       // envoie vers la page récapitulative si formulaire soumis
                       return $this->redirectToRoute('booking_prepare');
@@ -74,6 +75,7 @@ class TicketingController extends Controller
     { 
         if($_POST)
         {
+
           // paiement stripe
             $stripe = $this->container->get('louvre_ticketing.stripe');
             $stripe = $stripe->stripe();
@@ -83,19 +85,45 @@ class TicketingController extends Controller
             {
               //Envoi des infos en BDD 
 
+                // Récupération de la session
+                $session = $request->getSession();
+                $reservation = $session->get('billets');
+
+                $billets = $reservation->getBillet();
+
+                //Création du code de réservation
+                $code = $this->container->get('louvre_ticketing.codeReservation');
+                $code = $code->code(10);
+
+                $session = $request->getSession();
+                $reservation = $session->get('billets');
+
+                $reservation->setEmail($_POST['stripeEmail']);
+                $reservation->setReservationCode($code);
+
+                $visitDay = $reservation->getDay();
+
+                $billets = $reservation->getBillet();
+
+                foreach ($billets as $billet) {
+                  $billet->setReservation($reservation);
+                }
+
+                $em = $this->getDoctrine()->getManager();
+
+                // Étape 1 : On « persiste » l'entité
+                $em->persist($reservation);
+
+                foreach ($billets as $billet) {
+                  $billet->setVisitDay($visitDay);
+                  $em->persist($billet);
+                }
+
+                 $em->flush();
+
               //-----------------------
-              
-              // Envoi du mail 
 
-              // Récupération de la session
-              $session = $request->getSession();
-              $reservation = $session->get('billets');
-
-              $billets = $reservation->getBillet();
-
-              //Création du code de réservation
-              $code = $this->container->get('louvre_ticketing.codeReservation');
-              $code = $code->code(10);
+              // Mail 
 
               $mailer = $this->get('mailer');
 
@@ -129,11 +157,6 @@ class TicketingController extends Controller
         {
           return $this->redirectToRoute("booking"); 
         }
-    }
-
-    public function emailAction()
-    {
-      
     }
 
     public function informationsAction()
