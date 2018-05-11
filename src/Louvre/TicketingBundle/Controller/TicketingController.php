@@ -74,37 +74,44 @@ class TicketingController extends Controller
     { 
         if($_POST)
         {
-          // Récupération de la session
-          $session = $request->getSession();
-          $reservation = $session->get('billets');
-
-          $billets = $reservation->getBillet();
-
-          $code = $this->container->get('louvre_ticketing.codeReservation');
-          $code = $code->code(10);
-
-          /*$mailer = $this->get('mailer');
-
-          $message = (new \Swift_Message('Test Email'))
-            ->setFrom('billetterie@louvre.fr')
-            ->setTo($_POST['stripeEmail'])
-            ->setBody(
-                    $this->renderView(
-                      'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html');
-
-          $mailer->send($message);*/
-
-          return $this->render('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
-
-          /*// paiement stripe
+          // paiement stripe
             $stripe = $this->container->get('louvre_ticketing.stripe');
             $stripe = $stripe->stripe();
 
             //paiement réussi
             if($stripe == 'success')
             {
-              // envoie de mail
+              //Envoi des infos en BDD 
+
+              //-----------------------
+              
+              // Envoi du mail 
+
+              // Récupération de la session
+              $session = $request->getSession();
+              $reservation = $session->get('billets');
+
+              $billets = $reservation->getBillet();
+
+              //Création du code de réservation
+              $code = $this->container->get('louvre_ticketing.codeReservation');
+              $code = $code->code(10);
+
               $mailer = $this->get('mailer');
+
+              // Création du mail
+              $message = (new \Swift_Message('Test Email'))
+                ->setFrom('billetterie@louvre.fr')
+                ->setTo($_POST['stripeEmail'])
+                ->setBody(
+                        $this->renderView(
+                          'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html');
+
+              //Envoi du mail
+              $mailer->send($message);
+
+              //--------------------------------------------
+
 
                 $this->addFlash("success","Votre réservation à été effectué, vous allez recevoir un mail de confirmation dans les prochaines minutes");
 
@@ -116,7 +123,7 @@ class TicketingController extends Controller
                 $this->addFlash("error","Une erreur est intervenue durant le paiement, veuillez réessayer");
                 
                 return $this->redirectToRoute("booking_prepare");
-            }*/
+            }
         }
         else 
         {
