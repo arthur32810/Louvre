@@ -2,10 +2,10 @@ services:
   louvre_ticketing.price:
         class: Louvre\TicketingBundle\Services\LouvrePrice
         arguments:
-          - %normalPrice%
-          - %childrenPrice%
-          - %seniorPrice%
-          - %reducePrice%
+          - '%normalPrice%'
+          - '%childrenPrice%'
+          - '%seniorPrice%'
+          - '%reducePrice%'
 
   louvre_ticketing.hourBillet:
       class: Louvre\TicketingBundle\Services\LouvreHourBillet
@@ -16,7 +16,7 @@ services:
       arguments: 
         - "@request_stack" 
         - "@doctrine.orm.entity_manager"
-        - %quotaMax%
+        - '%quotaMax%'
 
   louvre_ticketing.stripe:
       class: Louvre\TicketingBundle\Services\Stripe
