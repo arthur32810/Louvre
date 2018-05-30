@@ -23,7 +23,7 @@
 		     {% endfor %}
 	  		{{ form_errors(form.billet)}}
 	  		{{ form_widget(form.billet)}}
-  			<a href="#" id="add_billet" class="btn btn-default">Ajouter un billet</a>
+  			<a href="#" id="add_billet" class="btn btn-secondary">Ajouter un billet</a>
 
 
   		</div>
@@ -90,7 +90,7 @@
 	    // La fonction qui ajoute un lien de suppression d'un billet
 	    function addDeleteLink($prototype) {
 	      // Création du lien
-	      var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer ce billet </a>');
+	      var $deleteLink = $('<p class="text-right"> <a href="#" class="btn btn-danger">Supprimer ce billet </a> </p>');
 	      // Ajout du lien
 	      $prototype.append($deleteLink);
 	      // Ajout du listener sur le clic du lien pour effectivement supprimer le billet
