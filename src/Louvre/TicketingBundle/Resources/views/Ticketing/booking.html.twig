@@ -11,15 +11,19 @@
 		{# Erreur du formulaire #}
 		{{ form_errors(form) }}
 
-		{{ form_row(form.day) }}
-
+		<div>
+			{{ form_label(form.day) }}
+			{{ form_widget(form.day) }}
+			<br/>
+			{{ form_errors(form.day) }}
+		</div> <br/>
 		
 	  	<div class="form-group">
 	  		 {% for message in app.session.flashbag.get('hourBillet') %}
-		        <p> {{ message }} </p>
+		        <p class="alert alert-danger" role="alert"> {{ message }} </p>
 		     {% endfor %}
 		     {% for message in app.session.flashbag.get('quotaMax') %}
-		        <p> {{ message }} </p>
+		        <p class="alert alert-danger" role="alert"> {{ message }} </p>
 		     {% endfor %}
 	  		{{ form_errors(form.billet)}}
 	  		{{ form_widget(form.billet)}}
@@ -102,6 +106,8 @@
 	      });
 	    }
 	  });
+
+	   document.querySelector('.list-unstyled li').className='alert alert-danger';
 </script>
 
 {% endblock %}

@@ -4,10 +4,10 @@
 
 {% block body %}
 	{% for message in app.session.flashbag.get('success') %}
-        <p> {{ message }} </p>
+        <p class="alert alert-success" role="alert"> {{ message }} </p>
      {% endfor %}
      {% for message in app.session.flashbag.get('error') %}
-        <p> {{ message }} </p>
+        <p class="alert alert-danger" role="alert"> {{ message }} </p>
      {% endfor %}
 
 	<div>
@@ -55,6 +55,10 @@
                 data-locale="auto"
                 data-currency="eur">
         </script>
+        <script>
+        	document.querySelector(".stripe-button-el span").innerHTML='Paiement';
+        </script>
+
         <input type="hidden" name="total" value="{{ total }}">
     </form>
  	
