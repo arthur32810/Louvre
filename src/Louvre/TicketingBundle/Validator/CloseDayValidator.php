@@ -29,10 +29,13 @@ class CloseDayValidator extends ConstraintValidator
   	}
 
   	// Vérification si la date est un mardi ou un dimanche -> erreur
-   	elseif($day == "Tuesday" OR $day == "Sunday"){
+   	elseif($day == "Tuesday"){
 
-  		$this->context->addViolation($constraint->closeDay);
+  		$this->context->addViolation($constraint->dayTuesday);
   	}
+    elseif($day == "Sunday"){
+      $this->context->addViolation($constraint->daySunday);
+    }
   
   }
 }

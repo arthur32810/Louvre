@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraint;
 class CloseDay extends Constraint
 {
 
-  	public $closeDay = "Musée fermé le mardi et dimanche";
+  	public $dayTuesday = "Musée fermé le mardi";
+  	public $daySunday = "Pas de réservation possible le dimanche";
   	public $closeHoliday= "Musée fermé les jours fériés";
 
 }
