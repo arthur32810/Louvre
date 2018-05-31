@@ -29,7 +29,7 @@ class BilletType extends AbstractType
             'html5' => true,
             'attr' => ['class' => 'data-picker']))
         ->add('country',    CountryType::class, array('placeholder' => 'Sélectionner votre pays', 'label' => 'Pays'))
-        ->add('duration',     ChoiceType::class, array('label' => 'Ticket',
+        ->add('duration',     ChoiceType::class, array('label' => 'Billet',
             'choices' => array(
                 'Journée' => 1,
                 'Demi-Journée (à partir de 14h)' => 0.5),
