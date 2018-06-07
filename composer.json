@@ -24,6 +24,7 @@
         "checkdomain/holiday": "~3.0.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "dompdf/dompdf": "^0.8.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "leafo/scssphp": "~0.6",
         "patchwork/jsqueeze": "~1.0",
