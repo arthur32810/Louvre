@@ -10,6 +10,9 @@ use Louvre\TicketingBundle\Entity\Billet;
 use Louvre\TicketingBundle\Form\ReservationType;
 use Louvre\TicketingBundle\Form\BilletType;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class TicketingController extends Controller
 {
@@ -123,6 +126,24 @@ class TicketingController extends Controller
 
               //-----------------------
 
+              // PDF
+
+              $options = new Options();
+
+              $options->set('isRemoteEnabled', TRUE);
+
+              $dompdf = new Dompdf($options);
+
+              $html = $this->renderView('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
+
+              $dompdf->loadHtml($html);
+
+              $dompdf->render();
+
+              $billetPdf = $dompdf->output();
+
+              //----------------------
+
               // Mail 
 
               $mailer = $this->get('mailer');
@@ -133,7 +154,8 @@ class TicketingController extends Controller
                 ->setTo($_POST['stripeEmail'])
                 ->setBody(
                         $this->renderView(
-                          'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html');
+                          'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html')
+                ->attach(new \Swift_Attachment($billetPdf, 'billet.pdf'));
 
               //Envoi du mail
               $mailer->send($message);
@@ -163,4 +185,5 @@ class TicketingController extends Controller
     {
           return $this->render('LouvreTicketingBundle:Ticketing:informations.html.twig');
     }
+
 }
