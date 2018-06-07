@@ -5,6 +5,10 @@
 {% block body %}
 	<h2 class="text-center"> Billetterie </h2>
 
+	{% for message in app.session.flashbag.get('success') %}
+        <p class="alert alert-success" role="alert"> {{ message }} </p>
+    {% endfor %}
+
 	<div>
 		{{ form_start(form) }}
 
