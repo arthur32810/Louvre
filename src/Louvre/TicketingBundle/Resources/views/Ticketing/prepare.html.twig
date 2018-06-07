@@ -3,9 +3,6 @@
 {% block title %}{{ parent() }} - Confirmation et paiement {% endblock %}
 
 {% block body %}
-	{% for message in app.session.flashbag.get('success') %}
-        <p class="alert alert-success" role="alert"> {{ message }} </p>
-     {% endfor %}
      {% for message in app.session.flashbag.get('error') %}
         <p class="alert alert-danger" role="alert"> {{ message }} </p>
      {% endfor %}
