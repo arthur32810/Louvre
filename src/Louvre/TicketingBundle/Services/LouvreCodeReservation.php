@@ -29,6 +29,8 @@ class LouvreCodeReservation
         $code .= $chaine[rand()%strlen($chaine)];
       }
 
+      $code = 'LV-'.$code;
+
       $exist_code = $this->em
       ->getRepository('LouvreTicketingBundle:Reservation')
       ->findByReservationCode($code);
