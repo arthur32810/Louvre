@@ -66,6 +66,7 @@ class TicketingController extends Controller
               // Test du nombre de billet
               foreach ($billets as $nbillet => $billet) {
 
+                  // Appel du service
                   $quotaMax = $this->container->get('louvre_ticketing.quotaMax');
                   $quotaMax = $quotaMax->quotaMax($visitDay, $nbillet);
 
@@ -81,18 +82,28 @@ class TicketingController extends Controller
                   }
               } 
 
+              // Calcul du tarif
+              foreach ($billets as $nbillet => $billet) {
 
-              /*
+                // Appel du service
+                $price = $this->container->get('louvre_ticketing.price');
 
-                   
-                        $price = $this->container->get('louvre_ticketing.price');
-                        $price = $price->price($billets);
+                // Récupération de la valeur "réduction"
+                $reduction = $billet->getReduction();
 
-  */
-                        /*$billets = $session->set('billets', $reservation);
-                        // envoie vers la page récapitulative si formulaire soumis
-                        return $this->redirectToRoute('booking_prepare');
-              */          
+                // Récupération de la date de naissance
+                $birthday = $billet->getBirthday();
+
+                $price = $price->price($reduction, $birthday);
+
+                $billet->setPrice($price);
+              }
+
+              $billets = $session->set('billets', $reservation);
+
+              // envoie vers la page récapitulative si formulaire soumis
+              return $this->redirectToRoute('booking_prepare');      
+
         }
         // Envoie vers la page de formulaire si non soumis
         return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
