@@ -2,6 +2,8 @@
 
 namespace Louvre\TicketingBundle\Controller;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,26 +38,43 @@ class TicketingController extends Controller
 
               $billets = $reservation->getBillet();
 
-              // Appel du service pour tester si le billet et acheté le même jour au dessus de 14h
-              $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
-              $hourBillet = $hourBillet->hourBillet($reservation, $billets);
+              $i = 0;
 
-              if($hourBillet != 'notHourBillet')
-              {
-                  $quotaMax = $this->container->get('louvre_ticketing.quotaMax');
-                  $quotaMax = $quotaMax->quotaMax($reservation, $billets);
+              //Test si un billet est invalide
+              foreach ($billets as $billet) {
+                $i++;
 
-                  if($quotaMax != 'moreQuotaMax')
-                  {
-                      $price = $this->container->get('louvre_ticketing.price');
-                      $price = $price->price($billets);
+                // Appel du service pour tester si le billet et acheté le même jour au dessus de 14h
+                $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
+
+                // Récupération du jour de visite
+                $visitDay = $reservation->getDay();
 
 
-                      $billets = $session->set('billets', $reservation);
-                      // envoie vers la page récapitulative si formulaire soumis
-                      return $this->redirectToRoute('booking_prepare');
-                  }
-              }
+                //Récupération du type de billet
+                $duration = $billet->getDuration();
+
+                $hourBillet = $hourBillet->hourBillet($visitDay, $duration);
+
+                if($hourBillet == 'notHourBillet')
+                {
+                  $session->getFlashBag()->add('hourBillet', 'Votre billet '.$i.' n\'est pas valide. Vous ne pouvez commandé de billet "journée" au-dessus de 14 heures.');
+                }
+              } 
+   
+              /*$quotaMax = $this->container->get('louvre_ticketing.quotaMax');
+                    $quotaMax = $quotaMax->quotaMax($reservation, $billets);
+
+                    if($quotaMax != 'moreQuotaMax')
+                    {
+                        $price = $this->container->get('louvre_ticketing.price');
+                        $price = $price->price($billets);
+
+  */
+                        /*$billets = $session->set('billets', $reservation);
+                        // envoie vers la page récapitulative si formulaire soumis
+                        return $this->redirectToRoute('booking_prepare');
+                    /*}*/          
         }
         // Envoie vers la page de formulaire si non soumis
         return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
