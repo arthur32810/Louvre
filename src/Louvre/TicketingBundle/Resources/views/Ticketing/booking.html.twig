@@ -9,6 +9,10 @@
         <p class="alert alert-success" role="alert"> {{ message }} </p>
     {% endfor %}
 
+    {% for message in app.session.flashbag.get('0billet') %}
+        <p class="alert alert-danger" role="alert"> {{ message }} </p>
+    {% endfor %}
+
 	<div>
 		{{ form_start(form) }}
 
