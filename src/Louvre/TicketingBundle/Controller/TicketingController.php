@@ -104,7 +104,7 @@ class TicketingController extends Controller
                 $billets = $session->set('billets', $reservation);
 
                 // envoie vers la page récapitulative si formulaire soumis
-                return $this->redirectToRoute('booking_prepare');      
+                return $this->redirectToRoute('booking_prepare');  
               }
 
               else {

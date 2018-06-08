@@ -37,7 +37,7 @@ class LouvreHourBillet
 			}
 
 		}
-		else { return; }
+		else { return 'ok'; }
 		
 	}
 }
