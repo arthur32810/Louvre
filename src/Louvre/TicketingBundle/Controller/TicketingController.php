@@ -38,18 +38,14 @@ class TicketingController extends Controller
 
               $billets = $reservation->getBillet();
 
-              $i = 0;
+              // Récupération du jour de visite
+              $visitDay = $reservation->getDay();
 
-              //Test si un billet est invalide
-              foreach ($billets as $billet) {
-                $i++;
+              // Test si un billet est acheté le même jour au dessus de 14h
+              foreach ($billets as $nbillet => $billet) {
 
-                // Appel du service pour tester si le billet et acheté le même jour au dessus de 14h
+                // Appel du service 
                 $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
-
-                // Récupération du jour de visite
-                $visitDay = $reservation->getDay();
-
 
                 //Récupération du type de billet
                 $duration = $billet->getDuration();
@@ -58,15 +54,37 @@ class TicketingController extends Controller
 
                 if($hourBillet == 'notHourBillet')
                 {
-                  $session->getFlashBag()->add('hourBillet', 'Votre billet '.$i.' n\'est pas valide. Vous ne pouvez commandé de billet "journée" au-dessus de 14 heures.');
-                }
-              } 
-   
-              /*$quotaMax = $this->container->get('louvre_ticketing.quotaMax');
-                    $quotaMax = $quotaMax->quotaMax($reservation, $billets);
+                  $session->getFlashBag()->add('hourBillet', 'Votre billet '.($nbillet+1).' n\'est pas valide. Vous ne pouvez commandé de billet "journée" au-dessus de 14 heures.');
 
-                    if($quotaMax != 'moreQuotaMax')
-                    {
+                  // Envoie vers la page de formulaire si non soumis
+                  return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
+                    'form' => $form->createView(),
+                  ));
+                }
+              }
+
+              // Test du nombre de billet
+              foreach ($billets as $nbillet => $billet) {
+
+                  $quotaMax = $this->container->get('louvre_ticketing.quotaMax');
+                  $quotaMax = $quotaMax->quotaMax($visitDay, $nbillet);
+
+                  if($quotaMax == 'moreQuotaMax')
+                  {
+                    //Message d'erreur
+                    $session->getFlashBag()->add('quotaMax', 'Vous dépassé le nombre de visiteur du jour, vous ne pouvez pas réserver votre billet '.($nbillet+1).'Veuillez supprimer ce billet ou choisir une autre date de visite.');
+
+                    // Envoie vers la page de formulaire si non soumis
+                    return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
+                      'form' => $form->createView(),
+                    ));
+                  }
+              } 
+
+
+              /*
+
+                   
                         $price = $this->container->get('louvre_ticketing.price');
                         $price = $price->price($billets);
 
@@ -74,7 +92,7 @@ class TicketingController extends Controller
                         /*$billets = $session->set('billets', $reservation);
                         // envoie vers la page récapitulative si formulaire soumis
                         return $this->redirectToRoute('booking_prepare');
-                    /*}*/          
+              */          
         }
         // Envoie vers la page de formulaire si non soumis
         return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
