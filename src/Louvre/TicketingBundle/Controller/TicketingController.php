@@ -36,7 +36,7 @@ class TicketingController extends Controller
 
               $billets = $reservation->getBillet();
 
-              // Appel du service pour tester si le billet et acheté la même jour au dessus de 14h
+              // Appel du service pour tester si le billet et acheté le même jour au dessus de 14h
               $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
               $hourBillet = $hourBillet->hourBillet($reservation, $billets);
 
