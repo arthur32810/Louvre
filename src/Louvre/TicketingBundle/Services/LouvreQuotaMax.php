@@ -19,7 +19,7 @@ class LouvreQuotaMax
     $this->quotaMax 	= $quotaMax;
   }
 
-  public function quotaMax($reservation, $billets)
+  public function quotaMax($visitDay, $nbillet)
   {
   	$request = $this->requestStack->getCurrentRequest();
 
@@ -29,39 +29,22 @@ class LouvreQuotaMax
     $request = $this->requestStack->getCurrentRequest();
 
     //récupération du jour de visite
-   	$visitDay = new DateTime($reservation->getDay()->format('m/d/Y'));
+   	$visitDay = new DateTime($visitDay->format('m/d/Y'));
 
     // on récupére le nombre de réservation pour le jour $visitDay
     $nReservation = $this->em
       ->getRepository('LouvreTicketingBundle:Billet')
       ->nReservation($visitDay);
 
-    //Définition du compteur
-    $i = 0;
-
-    // Défintion de la valeur de retour
-    $return = 'ok';
-
-    foreach ($billets as $billet) 
-    {
-    	$nReservation = $nReservation + $i;
+    
+    	$nReservation = $nReservation + $nbillet;
 
 	    //On regarde le nombre de réservation, s'il y a plus de 1000 places -> erreur
 	    if( $nReservation > $quotaMax ) 
 	    { 
-	    	//Définition de la session
-			$session = $request->getSession();
-
-	    	//Message d'erreur
-			$session->getFlashBag()->add('quotaMax', 'Vous dépassé le nombre de visiteur du jour, vous ne pouvez pas réserver votre billet '.($i+1));
-
-	        $return = 'moreQuotaMax';
+	    	return 'moreQuotaMax';
 	    }
-
-	    $i++;
-	}
-
-	return $return;
+      else { return; }
 
   }
 
