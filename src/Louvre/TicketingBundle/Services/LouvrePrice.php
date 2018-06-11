@@ -56,11 +56,10 @@ class LouvrePrice
 				{
 					return $this->seniorPrice;
 				}
-				else
-				{
-					throw new Exception("Il y a eu une erreur dans le calcul de l'âge, veuillez soumettre de nouveau le formulaire");
-				}	
-
+			}
+			else
+			{
+				throw new Exception("Il y a eu une erreur dans le calcul de l'âge, veuillez soumettre de nouveau le formulaire");
 			}
 			
 		}
