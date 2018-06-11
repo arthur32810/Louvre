@@ -35,6 +35,7 @@ class LouvreHourBillet
 				$return = 'notHourBillet';
 				return $return;
 			}
+			else {return 'ok'; }
 
 		}
 		else { return 'ok'; }

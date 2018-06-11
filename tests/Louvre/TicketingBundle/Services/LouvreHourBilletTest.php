@@ -22,14 +22,26 @@ class LouvreHourBilletTest extends TestCase
 		$this->assertSame( 'ok', $hour->hourBillet($date, 1) );
 	}
 
-	public function testnotHourBillet()
+	public function testNotHourBillet()
 	{
-		$requestStack = new RequestStack();
+		// Récupération de l'heure 
+		date_default_timezone_set('Europe/Paris');
+		$hour = date('H');
 
-		$hour = new LouvreHourBillet($requestStack);
+		if ($hour >= 14)
+		{
+			$requestStack = new RequestStack();
 
-		$date = new DateTime();
+			$hour = new LouvreHourBillet($requestStack);
 
-		$this->assertSame( 'notHourBillet', $hour->hourBillet($date, 1) );
+			$date = new DateTime();
+
+			$this->assertSame( 'notHourBillet', $hour->hourBillet($date, 1) );
+		}
+		else
+		{
+			$this->markTestSkipped( 'Heure inférierure à 14h.' );
+        }
+		
 	}
 }
