@@ -14,12 +14,17 @@ class LouvreHourBillet
 	  	$this->requestStack = $requestStack;
 	}
 
+<<<<<<< HEAD
 	public function hourBillet($reservation, $billets)
+=======
+	public function hourBillet($visitday, $duration)
+>>>>>>> tests
 	{
 		$request = $this->requestStack->getCurrentRequest();
 
 		//Récupération du jour et du jour de visite
 		$day = new DateTime(date('m/d/Y'));
+<<<<<<< HEAD
 	  	$visitday = new DateTime($reservation->getDay()->format('m/d/Y'));
 
 	  	//Défintion d'un compteur pour les billet
@@ -56,6 +61,27 @@ class LouvreHourBillet
 			}
 	  	}
 	  	return $return;
+=======
+	  	$visitday = new DateTime($visitday->format('m/d/Y'));
+	  	
+  		if($visitday == $day)
+		{							
+			// Récupération de l'heure 
+			date_default_timezone_set('Europe/Paris');
+			$hour = date('H');
+
+			// Test pour le billet journée
+			if($hour >= 14 && $duration == 1)
+			{	
+				// Si l'heure est supérieure à 14 h et le type de billet est journée (1) => Erreur
+				$return = 'notHourBillet';
+				return $return;
+			}
+			else {return 'ok'; }
+
+		}
+		else { return 'ok'; }
+>>>>>>> tests
 		
 	}
 }

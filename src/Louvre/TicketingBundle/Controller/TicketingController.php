@@ -2,6 +2,11 @@
 
 namespace Louvre\TicketingBundle\Controller;
 
+<<<<<<< HEAD
+=======
+use Symfony\Component\Config\Definition\Exception\Exception;
+
+>>>>>>> tests
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +41,7 @@ class TicketingController extends Controller
 
               $billets = $reservation->getBillet();
 
+<<<<<<< HEAD
               // Appel du service pour tester si le billet et acheté la même jour au dessus de 14h
               $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
               $hourBillet = $hourBillet->hourBillet($reservation, $billets);
@@ -55,6 +61,79 @@ class TicketingController extends Controller
                       // envoie vers la page récapitulative si formulaire soumis
                       return $this->redirectToRoute('booking_prepare');
                   }
+=======
+             if (count($billets) > 0)
+             {
+                // Récupération du jour de visite
+                $visitDay = $reservation->getDay();
+
+                // Test si un billet est acheté le même jour au dessus de 14h
+                foreach ($billets as $nbillet => $billet) {
+
+                  // Appel du service 
+                  $hourBillet = $this->container->get('louvre_ticketing.hourBillet');
+
+                  //Récupération du type de billet
+                  $duration = $billet->getDuration();
+
+                  $hourBillet = $hourBillet->hourBillet($visitDay, $duration);
+
+                  if($hourBillet == 'notHourBillet')
+                  {
+                    $session->getFlashBag()->add('hourBillet', 'Votre billet '.($nbillet+1).' n\'est pas valide. Vous ne pouvez commandé de billet "journée" au-dessus de 14 heures.');
+
+                    // Envoie vers la page de formulaire si non soumis
+                    return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
+                      'form' => $form->createView(),
+                    ));
+                  }
+                }
+
+                // Test du nombre de billet
+                foreach ($billets as $nbillet => $billet) {
+
+                    // Appel du service
+                    $quotaMax = $this->container->get('louvre_ticketing.quotaMax');
+                    $quotaMax = $quotaMax->quotaMax($visitDay, $nbillet);
+
+                    if($quotaMax == 'moreQuotaMax')
+                    {
+                      //Message d'erreur
+                      $session->getFlashBag()->add('quotaMax', 'Vous dépassé le nombre de visiteur du jour, vous ne pouvez pas réserver votre billet '.($nbillet+1).'Veuillez supprimer ce billet ou choisir une autre date de visite.');
+
+                      // Envoie vers la page de formulaire si non soumis
+                      return $this->render('LouvreTicketingBundle:Ticketing:booking.html.twig', array(
+                        'form' => $form->createView(),
+                      ));
+                    }
+                } 
+
+                // Calcul du tarif
+                foreach ($billets as $nbillet => $billet) {
+
+                  // Appel du service
+                  $price = $this->container->get('louvre_ticketing.price');
+
+                  // Récupération de la valeur "réduction"
+                  $reduction = $billet->getReduction();
+
+                  // Récupération de la date de naissance
+                  $birthday = $billet->getBirthday();
+
+                  $price = $price->price($reduction, $birthday);
+
+                  $billet->setPrice($price);
+                }
+
+                $billets = $session->set('billets', $reservation);
+
+                // envoie vers la page récapitulative si formulaire soumis
+                return $this->redirectToRoute('booking_prepare');  
+              }
+
+              else {
+                      $session->getFlashBag()->add('0billet', 'Aucun billet n\'a été rempli.');
+>>>>>>> tests
               }
         }
         // Envoie vers la page de formulaire si non soumis

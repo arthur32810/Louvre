@@ -20,6 +20,7 @@ class LouvrePrice
 		$this->reducePrice 		= $reducePrice;
 	}
 
+<<<<<<< HEAD
 	public function price($billets)
 	{	
 		
@@ -78,5 +79,52 @@ class LouvrePrice
 			}
 		}
 		
+=======
+	public function price($reduction, $birthday)
+	{	
+	
+
+		if($reduction)
+		{
+			return $this->reducePrice;
+		}
+
+		else 
+		{
+			// Création de la date du jour
+			$day = new DateTime(date('m/d/Y'));
+
+			if($birthday < $day)
+			{
+				// Calcul de l'âge
+				$age = $birthday->diff($day);
+				$age = intval($age->format('%y'));
+
+				if($age < 4)
+				{
+					return 0;
+				}
+				elseif($age >= 4 && $age < 12)
+				{
+					return $this->childrenPrice;
+				}
+				elseif($age >= 12 && $age < 60)
+				{
+					return $this->normalPrice;
+				}
+				elseif($age >= 60)
+				{
+					return $this->seniorPrice;
+				}
+			}
+			else
+			{
+				throw new \LogicException("Il y a eu une erreur dans le calcul de l'âge, veuillez soumettre de nouveau le formulaire");
+			}
+			
+		}
+		
+		
+>>>>>>> tests
 	}
 }
