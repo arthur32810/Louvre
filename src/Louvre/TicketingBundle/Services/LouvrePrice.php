@@ -59,7 +59,7 @@ class LouvrePrice
 			}
 			else
 			{
-				throw new Exception("Il y a eu une erreur dans le calcul de l'âge, veuillez soumettre de nouveau le formulaire");
+				throw new \LogicException("Il y a eu une erreur dans le calcul de l'âge, veuillez soumettre de nouveau le formulaire");
 			}
 			
 		}
