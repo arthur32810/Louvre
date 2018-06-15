@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+  {# On charge le CSS de bootstrap depuis le site directement #}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+  <body>
+  	<div class="container">
+  		<br>
+  		<div style="text-align: center;"> 
+	  		<img src="{{ app.request.schemeAndHttpHost ~ asset('bundles/louvreticketing/images/logo.jpg') }}" alt="logo musée du louvre" />
+	  		<h1> Musée du Louvre </h1>
+	  	</div>
+		 <br>
+
+		<h3> Confirmation de votre réservation pour le {{ reservation.day | date('d/m/Y') }} </h3>
+		<p> Ce mail fait office de billet de réservation </p>
+
+		{% set total = 0 %}
+
+		
+			{% for billet in billets %}
+			<h3> <b> Billet  {{ loop.index }} </b> </h3>
+	 		<p> Nom : {{ billet.name }} </p>
+	 		<p> Prénom :  {{ billet.lastname }} </p>
+	 		<p> Prix : {{ billet.price }} € </p>
+
+
+	 		{# Calcul du total #}
+	 	 	{% set total = total +  billet.price %}
+	 	{% endfor %}
+
+		<p> <b> Total :  {{ total }} € </b> </p>
+
+		<p> code de réservation : {{ code }} </p>
+
+	 	<hr>
+
+	  	<footer>
+	  		<p style="text-align: center"> Musée du Louvre © {{ 'now'|date('Y') }}.</p>
+	  	</footer>
+	 </div>
+
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>

@@ -1,0 +1,62 @@
+{% extends "LouvreTicketingBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Confirmation et paiement {% endblock %}
+
+{% block body %}
+     {% for message in app.session.flashbag.get('error') %}
+        <p class="alert alert-danger" role="alert"> {{ message }} </p>
+     {% endfor %}
+
+	<div>
+		<h1> Récapitulatif de votre Réservation : </h1> <br>
+		<p> Date de votre visite : {{ reservation.day | date('d/m/Y') }} </p>
+	</div> </br>
+
+	{% set total = 0 %}
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col"> # </th>
+				<th scope="col"> Nom </th>
+				<th scope="col"> Prénom </th>
+				<th scope="col"> Date de Naissance </th>
+				<th scope="col"> Prix </th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for billet in billets %}
+				<tr>
+		 			<th scope="row"> {{ loop.index }} </th>
+		 			<td> {{ billet.name }} </td>
+		 			<td> {{ billet.lastname }} </td>
+		 			<td> {{ billet.birthday | date('d/m/Y') }} </td>
+		 			<td> {{ billet.price }} €</td>
+		 		</tr>
+
+		 		{# Calcul du total #}
+		 	 	{% set total = total +  billet.price %}
+		 	{% endfor %}
+		</tbody>
+	</table>
+
+	<p> Total :  {{ total }} € </p>
+
+	<form action="{{ path('booking_checkout') }}" method="POST">
+        <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_KgmdfQAwbR879bX872M4z1he"
+                data-name="Musée du Louvre"
+                data-description="Réservation de billets"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-currency="eur">
+        </script>
+        <script>
+        	document.querySelector(".stripe-button-el span").innerHTML='Paiement';
+        </script>
+
+        <input type="hidden" name="total" value="{{ total }}">
+    </form>
+ 	
+{% endblock %}

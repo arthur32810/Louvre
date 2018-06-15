@@ -1,0 +1,19 @@
+home:
+    path:     /
+    defaults: {_controller: LouvreTicketingBundle:Ticketing:index}
+
+booking:
+    path:     /booking
+    defaults: {_controller: LouvreTicketingBundle:Ticketing:booking}
+
+booking_prepare:
+    path:     /booking/prepare
+    defaults: {_controller: LouvreTicketingBundle:Ticketing:prepare}
+
+booking_checkout:
+    path:     /booking/prepare/checkout 
+    defaults: {_controller: LouvreTicketingBundle:Ticketing:checkout}
+
+informations:
+    path:     /informations-pratiques
+    defaults: {_controller: LouvreTicketingBundle:Ticketing:informations}

@@ -1,0 +1,5 @@
+body {background-image: url("../images/fond.jpg");
+		background-attachment: fixed;}
+
+div.container {background-color: white; 
+				opacity: 0.98}

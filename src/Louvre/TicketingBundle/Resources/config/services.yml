@@ -1,0 +1,31 @@
+services:
+  louvre_ticketing.price:
+        class: Louvre\TicketingBundle\Services\LouvrePrice
+        arguments:
+          - '%normalPrice%'
+          - '%childrenPrice%'
+          - '%seniorPrice%'
+          - '%reducePrice%'
+
+  louvre_ticketing.hourBillet:
+      class: Louvre\TicketingBundle\Services\LouvreHourBillet
+      arguments: ["@request_stack"]
+
+  louvre_ticketing.quotaMax:
+      class: Louvre\TicketingBundle\Services\LouvreQuotaMax
+      arguments: 
+        - "@request_stack" 
+        - "@doctrine.orm.entity_manager"
+        - '%quotaMax%'
+
+  louvre_ticketing.stripe:
+      class: Louvre\TicketingBundle\Services\Stripe
+
+  louvre_ticketing.codeReservation:
+      class: Louvre\TicketingBundle\Services\LouvreCodeReservation
+      arguments:
+        - "@doctrine.orm.entity_manager"
+
+#    louvre_ticketing.example:
+#        class: Louvre\TicketingBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
