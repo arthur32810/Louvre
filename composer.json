@@ -40,6 +40,7 @@
         "coresphere/console-bundle": "~0.5"
     },
     "require-dev": {
+        "easycorp/easy-deploy-bundle": "^1.0",
         "phpunit/phpunit": "7",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^4.1"
