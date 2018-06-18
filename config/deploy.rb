@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "Louvre"
-set :repo_url, "artdevelopp@canard:home/artdevelopp/louvre.artdevelopp.fr/git/"
+set :repo_url, "artdevelopp@canard:/home/artdevelopp/louvre.artdevelopp.fr/git/"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
