@@ -202,9 +202,9 @@ class TicketingController extends Controller
 
               $mailer = $this->get('mailer');
 
-              // Création du mail
-              $message = (new \Swift_Message('Votre réseravtion pour le '.$reservation->getDay()->format('d/m/Y')))
-                ->setFrom('billetterie@louvre.fr')
+               // Création du mail
+              $message = (new \Swift_Message('Votre réservation pour le '.$reservation->getDay()->format('d/m/Y')))
+                ->setFrom('ticketing@louvre.artdevelopp.fr')
                 ->setTo($_POST['stripeEmail'])
                 ->setBody(
                         $this->renderView(

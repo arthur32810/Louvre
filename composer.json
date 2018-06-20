@@ -22,9 +22,11 @@
     "require": {
         "php": ">=5.5.9",
         "checkdomain/holiday": "~3.0.0",
+        "coresphere/console-bundle": "~0.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "dompdf/dompdf": "^0.8.2",
+        "easycorp/easy-deploy-bundle": "^1.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "leafo/scssphp": "~0.6",
         "patchwork/jsqueeze": "~1.0",
@@ -36,11 +38,9 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
-        "twig/twig": "^1.0||^2.0",
-        "coresphere/console-bundle": "~0.5"
+        "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
-        "easycorp/easy-deploy-bundle": "^1.0",
         "phpunit/phpunit": "7",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^4.1"
