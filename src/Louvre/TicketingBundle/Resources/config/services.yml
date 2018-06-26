@@ -6,6 +6,9 @@ services:
           - '%childrenPrice%'
           - '%seniorPrice%'
           - '%reducePrice%'
+          - '%childrenAge%'
+          - '%normalAge%'
+          - '%seniorAge%'
 
   louvre_ticketing.hourBillet:
       class: Louvre\TicketingBundle\Services\LouvreHourBillet

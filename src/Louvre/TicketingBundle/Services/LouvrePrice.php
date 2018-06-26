@@ -12,12 +12,19 @@ class LouvrePrice
 	private $seniorPrice;
 	private $reducePrice;
 
-	public function __construct($normalPrice, $childrenPrice, $seniorPrice, $reducePrice){
+	private $childrenAge;
+	private $normalAge;
+	private $seniorAge;
+
+	public function __construct($normalPrice, $childrenPrice, $seniorPrice, $reducePrice, $childrenAge, $normalAge, $seniorAge){
 
 		$this->normalPrice 		= $normalPrice;
 		$this->childrenPrice	= $childrenPrice;
 		$this->seniorPrice 		= $seniorPrice;
 		$this->reducePrice 		= $reducePrice;
+		$this->childrenAge		= $childrenAge;
+		$this->normalAge		= $normalAge;
+		$this->seniorAge		= $seniorAge;
 	}
 
 	public function price($reduction, $birthday)
@@ -40,19 +47,19 @@ class LouvrePrice
 				$age = $birthday->diff($day);
 				$age = intval($age->format('%y'));
 
-				if($age < 4)
+				if($age < $this->childrenAge)
 				{
 					return 0;
 				}
-				elseif($age >= 4 && $age < 12)
+				elseif($age >= $this->childrenAge && $age < $this->normalAge)
 				{
 					return $this->childrenPrice;
 				}
-				elseif($age >= 12 && $age < 60)
+				elseif($age >= $this->normalAge && $age < $this->seniorAge)
 				{
 					return $this->normalPrice;
 				}
-				elseif($age >= 60)
+				elseif($age >= $this->seniorAge)
 				{
 					return $this->seniorPrice;
 				}
