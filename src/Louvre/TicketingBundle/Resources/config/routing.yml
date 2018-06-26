@@ -14,6 +14,10 @@ booking_checkout:
     path:     /booking/prepare/checkout 
     defaults: {_controller: LouvreTicketingBundle:Ticketing:checkout}
 
+booking_thanks:
+    path:   /booking/thanks 
+    defaults: {_controller: LouvreTicketingBundle;Ticketing:thanks}
+
 informations:
     path:     /informations-pratiques
     defaults: {_controller: LouvreTicketingBundle:Ticketing:informations}
