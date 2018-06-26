@@ -43,6 +43,7 @@ services:
       arguments:
         - "@louvre_ticketing.stripe"
         - "@louvre_ticketing.codeReservation"
+        - "@request_stack"
         - "@doctrine.orm.entity_manager"
         - "@twig"
         - "@mailer"

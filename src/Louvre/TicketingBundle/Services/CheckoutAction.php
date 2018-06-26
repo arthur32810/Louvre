@@ -4,9 +4,8 @@ namespace Louvre\TicketingBundle\Services;
 
 use Louvre\TicketingBundle\Services\Stripe;
 use Louvre\TicketingBundle\Services\LouvreCodeReservation;
-
+use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,10 +16,11 @@ class CheckoutAction
 {
 	private $stripeService;
 	private $LouvreCodeReservation;
+  private $requestStack;
 	private $twig;
 	private $mailer;
 
-	public function __construct(Stripe $stripeService, LouvreCodeReservation $louvreCodeReservation, EntityManagerInterface $em, $twig, $mailer)
+	public function __construct(Stripe $stripeService, LouvreCodeReservation $louvreCodeReservation, RequestStack $requestStack EntityManagerInterface $em, $twig, $mailer)
 	{
 		$this->stripeService 			= $stripeService;
 		$this->louvreCodeReservation 	= $louvreCodeReservation;
@@ -46,7 +46,9 @@ class CheckoutAction
 
                 $reservation = $session->get('billets');
 
-                $reservation->setEmail($_POST['stripeEmail']);
+                $request = $this->requestStack->getCurrentRequest();
+
+                $reservation->setEmail($request->request->get('stripeEmail'));
                 $reservation->setReservationCode($code);
 
                 $visitDay = $reservation->getDay();

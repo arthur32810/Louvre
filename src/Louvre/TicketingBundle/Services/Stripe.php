@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class Stripe
 {
+	private $requestStack;
 	public function __construct(RequestStack $requestStack)
 	{
 		$this->requestStack = $requestStack;
