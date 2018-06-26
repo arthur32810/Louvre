@@ -20,13 +20,14 @@ class CheckoutAction
 	private $twig;
 	private $mailer;
 
-	public function __construct(Stripe $stripeService, LouvreCodeReservation $louvreCodeReservation, RequestStack $requestStack EntityManagerInterface $em, $twig, $mailer)
+	public function __construct(Stripe $stripeService, LouvreCodeReservation $louvreCodeReservation, RequestStack $requestStack, EntityManagerInterface $em, $twig, $mailer)
 	{
-		$this->stripeService 			= $stripeService;
+		$this->stripeService 			    = $stripeService;
 		$this->louvreCodeReservation 	= $louvreCodeReservation;
-		$this->em 						= $em;
-		$this->twig 					= $twig;
-		$this->mailer 					= $mailer;
+    $this->requestStack           = $requestStack;
+		$this->em 						        = $em;
+		$this->twig 					        = $twig;
+		$this->mailer 					      = $mailer;
 	}
 	public function checkoutAction($session)
 	{
@@ -105,8 +106,8 @@ class CheckoutAction
 
               //--------------------------------------------
 
-              $session->clear('billets');
-
+                $session->clear('billets');
+                
                 return 'ok';
             }
             // erreur sur le paiement

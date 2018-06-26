@@ -23,7 +23,7 @@ class Stripe
 		  $token = $request->request->get('stripeToken');
 
 		  // récupération du total 
-		  $total = intval($request->request->get('total');.'00');
+		  $total = intval($request->request->get('total').'00');
 
 		  // Create a charge: this will charge the user's card
 		  try {
