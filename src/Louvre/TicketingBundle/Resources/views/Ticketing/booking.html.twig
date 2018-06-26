@@ -5,10 +5,6 @@
 {% block body %}
 	<h2 class="text-center"> Billetterie </h2>
 
-	{% for message in app.session.flashbag.get('success') %}
-        <p class="alert alert-success" role="alert"> {{ message }} </p>
-    {% endfor %}
-
     {% for message in app.session.flashbag.get('0billet') %}
         <p class="alert alert-danger" role="alert"> {{ message }} </p>
     {% endfor %}

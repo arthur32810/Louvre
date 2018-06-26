@@ -70,8 +70,6 @@ class TicketingController extends Controller
 
           if( $checkoutAction == 'ok')
           {
-              $session->getFlashBag()->add("success","Votre réservation à été effectuée, vous allez recevoir un mail de confirmation dans les prochaines minutes");
-
               return $this->redirectToRoute("booking_thanks");
           }
         }
