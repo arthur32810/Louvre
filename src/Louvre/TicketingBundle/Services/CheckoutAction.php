@@ -103,6 +103,7 @@ class CheckoutAction
 
               //--------------------------------------------
 
+              $session->clear('billets');
 
                 return 'ok';
             }
