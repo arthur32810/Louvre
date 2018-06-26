@@ -1,0 +1,18 @@
+{% extends "LouvreTicketingBundle::layout.html.twig" %}
+
+{% block title %} Merci pour votre réservation - {{ parent() }} {% endblock %}
+
+{% block body %}
+	<h2 class="text-center"> Merci de votre réservation </h2> <br/>
+
+	<p> Un mail vous a été envoyé avec vos informations de réservation, veuillez le présentez à votre arrivé </p>
+
+	<p> Nous espérons que votre futur visite dans notre musée se passera à merveille !</p>
+
+	<p> vous pouvez consultez les informations pour vous rendre à notre musée sur la page <a  href="{{ url('informations') }}"> information pratique </a> </p>
+
+	<div class="text-center">
+		<a href="{{ url('home') }}" class="btn btn-light" role="button" > Retour à la page d'accueil </a>
+	</div>
+
+{% endblock %}
