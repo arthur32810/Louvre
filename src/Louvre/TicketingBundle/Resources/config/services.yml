@@ -36,8 +36,15 @@ services:
         - "@louvre_ticketing.quotaMax"
         - "@louvre_ticketing.price"
 
-  louvre_ticketing.prepare:
-      class:  Louvre\TicketingBundle\Services\PrepareAction
+  louvre_ticketing.checkout:
+      class:  Louvre\TicketingBundle\Services\CheckoutAction
+      arguments:
+        - "@louvre_ticketing.stripe"
+        - "@louvre_ticketing.codeReservation"
+        - "@doctrine.orm.entity_manager"
+        - "@twig"
+        - "@mailer"
+
 
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example

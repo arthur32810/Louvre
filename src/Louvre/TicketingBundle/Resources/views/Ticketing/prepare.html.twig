@@ -42,7 +42,7 @@
 
 	<p> Total :  {{ total }} € </p>
 
-	<form action="{{ path('booking_checkout') }}" method="POST">
+	<form action="{{ path('booking_checkout') }}" name="stripe" method="POST">
         <script
                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="pk_test_KgmdfQAwbR879bX872M4z1he"

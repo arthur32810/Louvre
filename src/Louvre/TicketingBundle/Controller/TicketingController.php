@@ -12,9 +12,6 @@ use Louvre\TicketingBundle\Entity\Billet;
 use Louvre\TicketingBundle\Form\ReservationType;
 use Louvre\TicketingBundle\Form\BilletType;
 
-use Dompdf\Dompdf;
-use Dompdf\Options;
-
 
 class TicketingController extends Controller
 {
@@ -63,108 +60,24 @@ class TicketingController extends Controller
 
     public function checkoutAction(Request $request)
     { 
-        if($_POST)
+        if ($request->isMethod('POST'))
         {
+          // Récupération de la session
+          $session = $request->getSession();
 
-          // paiement stripe
-            $stripe = $this->container->get('louvre_ticketing.stripe');
-            $stripe = $stripe->stripe();
+          $checkoutAction = $this->container->get('louvre_ticketing.checkout');
+          $checkoutAction = $checkoutAction->checkoutAction($session);
 
-            //paiement réussi
-            if($stripe == 'success')
-            {
-              //Envoi des infos en BDD 
+          if( $checkoutAction == 'ok')
+          {
+              $session->getFlashBag()->add("success","Votre réservation à été effectuée, vous allez recevoir un mail de confirmation dans les prochaines minutes");
 
-                // Récupération de la session
-                $session = $request->getSession();
-                $reservation = $session->get('billets');
-
-                $billets = $reservation->getBillet();
-
-                //Création du code de réservation
-                $code = $this->container->get('louvre_ticketing.codeReservation');
-                $code = $code->code(10);
-
-                $session = $request->getSession();
-                $reservation = $session->get('billets');
-
-                $reservation->setEmail($_POST['stripeEmail']);
-                $reservation->setReservationCode($code);
-
-                $visitDay = $reservation->getDay();
-
-                $billets = $reservation->getBillet();
-
-                foreach ($billets as $billet) {
-                  $billet->setReservation($reservation);
-                }
-
-                $em = $this->getDoctrine()->getManager();
-
-                // Étape 1 : On « persiste » l'entité
-                $em->persist($reservation);
-
-                foreach ($billets as $billet) {
-                  $billet->setVisitDay($visitDay);
-                  $em->persist($billet);
-                }
-
-                 $em->flush();
-
-              //-----------------------
-
-              // PDF
-
-              $options = new Options();
-
-              $options->set('isRemoteEnabled', TRUE);
-
-              $dompdf = new Dompdf($options);
-
-              $html = $this->renderView('LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code));
-
-              $dompdf->loadHtml($html);
-
-              $dompdf->render();
-
-              $billetPdf = $dompdf->output();
-
-              //----------------------
-
-              // Mail 
-
-              $mailer = $this->get('mailer');
-
-              // Création du mail
-              $message = (new \Swift_Message('Votre réseravtion pour le '.$reservation->getDay()->format('d/m/Y')))
-                ->setFrom('billetterie@louvre.fr')
-                ->setTo($_POST['stripeEmail'])
-                ->setBody(
-                        $this->renderView(
-                          'LouvreTicketingBundle:Ticketing:billet.html.twig', array("reservation"=> $reservation, "billets" => $billets, "code" => $code)), 'text/html')
-                ->attach(new \Swift_Attachment($billetPdf, 'billet.pdf'));
-
-              //Envoi du mail
-              $mailer->send($message);
-
-              //--------------------------------------------
-
-
-                $this->addFlash("success","Votre réservation à été effectuée, vous allez recevoir un mail de confirmation dans les prochaines minutes");
-
-                return $this->redirectToRoute("booking");
-            }
-            // erreur sur le paiement
-            elseif($stripe == 'error')
-            {
-                $this->addFlash("error","Une erreur est intervenue durant le paiement, veuillez réessayer");
-                
-                return $this->redirectToRoute("booking_prepare");
-            }
+              return $this->redirectToRoute("booking");
+          }
         }
         else 
         {
-          return $this->redirectToRoute("booking"); 
+          return $this->redirectToRoute("booking_prepare"); 
         }
     }
 
