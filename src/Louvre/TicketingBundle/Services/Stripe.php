@@ -2,18 +2,27 @@
 
 namespace Louvre\TicketingBundle\Services;
 
+use Symfony\Component\HttpFoundation\RequestStack;
+
 class Stripe
 {
+	public function __construct(RequestStack $requestStack)
+	{
+		$this->requestStack = $requestStack;
+	}
+
 	public function stripe()
 	{
+		$request = $this->requestStack->getCurrentRequest();
+
 		\Stripe\Stripe::setApiKey("sk_test_GyKdvxgMo9I1HSjAzeHsdeZp");
 
 
 		  // Get the credit card details submitted by the form
-		  $token = $_POST['stripeToken'];
+		  $token = $request->request->get('stripeToken');
 
 		  // récupération du total 
-		  $total = intval($_POST['total'].'00');
+		  $total = intval($request->request->get('total');.'00');
 
 		  // Create a charge: this will charge the user's card
 		  try {
@@ -21,7 +30,7 @@ class Stripe
 		          "amount" => $total, // Amount in cents
 		          "currency" => "eur",
 		          "source" => $token,
-		          "description" => "Paiement Stripe - OpenClassrooms Exemple"
+		          "description" => "Paiement Stripe - Musée du louvre"
 		      ));
 
 		      return 'success';

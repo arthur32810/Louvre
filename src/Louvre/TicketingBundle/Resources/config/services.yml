@@ -23,6 +23,8 @@ services:
 
   louvre_ticketing.stripe:
       class: Louvre\TicketingBundle\Services\Stripe
+      arguments:
+        - "@request_stack"
 
   louvre_ticketing.codeReservation:
       class: Louvre\TicketingBundle\Services\LouvreCodeReservation
