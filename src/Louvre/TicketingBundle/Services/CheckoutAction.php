@@ -32,8 +32,7 @@ class CheckoutAction
 	{
 
           	// paiement stripe
-            //$stripe = $this->stripeService->stripe();
-			$stripe = 'success';
+            $stripe = $this->stripeService->stripe();
 
             //paiement réussi
             if($stripe == 'success')

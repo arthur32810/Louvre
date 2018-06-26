@@ -72,7 +72,7 @@ class TicketingController extends Controller
           {
               $session->getFlashBag()->add("success","Votre réservation à été effectuée, vous allez recevoir un mail de confirmation dans les prochaines minutes");
 
-              return $this->redirectToRoute("booking");
+              return $this->render('LouvreTicketingBundle:Ticketing:checkout.html.twig');
           }
         }
         else 
