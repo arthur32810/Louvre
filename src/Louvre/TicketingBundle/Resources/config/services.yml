@@ -29,6 +29,16 @@ services:
       arguments:
         - "@doctrine.orm.entity_manager"
 
+  louvre_ticketing.booking:
+      class: Louvre\TicketingBundle\Services\BookingAction
+      arguments:
+        - "@louvre_ticketing.hourBillet"
+        - "@louvre_ticketing.quotaMax"
+        - "@louvre_ticketing.price"
+
+  louvre_ticketing.prepare:
+      class:  Louvre\TicketingBundle\Services\PrepareAction
+
 #    louvre_ticketing.example:
 #        class: Louvre\TicketingBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
