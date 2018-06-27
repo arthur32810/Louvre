@@ -27,7 +27,7 @@ class BilletType extends AbstractType
             'widget' => 'single_text',
             'data' => new \DateTime(),
             'html5' => false,
-            'attr' => ['class' => 'data-picker']))
+            'attr' => ['class' => 'data-pickers']))
         ->add('country',    CountryType::class, array('placeholder' => 'Sélectionner votre pays', 'label' => 'Pays'))
         ->add('duration',     ChoiceType::class, array('label' => 'Billet',
             'choices' => array(
