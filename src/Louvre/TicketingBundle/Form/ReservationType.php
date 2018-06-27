@@ -21,7 +21,7 @@ class ReservationType extends AbstractType
         ->add('day', DateType::class, array('label' => 'Jour de la visite',
             'widget' => 'single_text',
             'data' => new \DateTime(),
-            'html5' => true,
+            'html5' => false,
             'attr' => ['class' => 'data-picker']))
         ->add('billet',     CollectionType::class, array(
             'entry_type'    => BilletType::class,

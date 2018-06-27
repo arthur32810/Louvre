@@ -2,6 +2,17 @@
 
 {% block title %}{{ parent() }} - Billetterie {% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/louvreticketing/css/main.css') }}" type="text/css" />
+
+	{# On charge le CSS de bootstrap depuis le site directement #}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+
+{% endblock %}
+
+
 {% block body %}
 	<h2 class="text-center"> Billetterie </h2>
 
@@ -49,10 +60,20 @@
 	   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"> </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.fr.min.js"> </script>
 
 	{# Script pour rajouter des billets #}
 	<script type="text/javascript">
 	  $(document).ready(function() {
+	  	$('.data-picker').datepicker({
+	  		format: "yyyy-mm-dd",
+	  		startDate: "today",
+	  		maxViewMode: 2,
+	  		todayBtn: "linked",
+	  		language: "fr",
+	  		autoclose: true
+	  	});
 	    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
 	    var $container = $('div#louvre_ticketingbundle_reservation_billet');
 	    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
@@ -94,6 +115,15 @@
 	      $container.append($prototype);
 	      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
 	      index++;
+
+	      $('.data-picker').datepicker({
+	  		format: "yyyy-mm-dd",
+	  		endDate: "today",
+	  		maxViewMode: 2,
+	  		todayBtn: "linked",
+	  		language: "fr",
+	  		autoclose: true
+	  	});
 	    }
 	    // La fonction qui ajoute un lien de suppression d'un billet
 	    function addDeleteLink($prototype) {
@@ -112,6 +142,8 @@
 	  });
 
 	   document.querySelector('.list-unstyled li').className='alert alert-danger';
+
+	   
 </script>
 
 {% endblock %}

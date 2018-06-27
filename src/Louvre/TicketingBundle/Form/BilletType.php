@@ -26,7 +26,7 @@ class BilletType extends AbstractType
         ->add('birthday',   BirthdayType::class, array('label' => 'Date de naissance',
             'widget' => 'single_text',
             'data' => new \DateTime(),
-            'html5' => true,
+            'html5' => false,
             'attr' => ['class' => 'data-picker']))
         ->add('country',    CountryType::class, array('placeholder' => 'Sélectionner votre pays', 'label' => 'Pays'))
         ->add('duration',     ChoiceType::class, array('label' => 'Billet',
