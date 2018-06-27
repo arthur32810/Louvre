@@ -12,7 +12,7 @@ class CloseDayValidator extends ConstraintValidator
   {
 
   	$util = new \Checkdomain\Holiday\Util();
-
+    
   	//Date en string
   	$date = date_format($date, 'd-m-Y');
 
