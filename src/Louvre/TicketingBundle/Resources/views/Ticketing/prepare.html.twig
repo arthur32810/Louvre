@@ -28,8 +28,8 @@
 			{% for billet in billets %}
 				<tr>
 		 			<th scope="row"> {{ loop.index }} </th>
-		 			<td> {{ billet.name }} </td>
 		 			<td> {{ billet.lastname }} </td>
+		 			<td> {{ billet.name }} </td>
 		 			<td> {{ billet.birthday | date('d/m/Y') }} </td>
 		 			<td> {{ billet.price }} €</td>
 		 		</tr>
